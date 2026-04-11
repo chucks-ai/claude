@@ -11,7 +11,7 @@
   "plugins": [
     {
       "name": "adventureforge",
-      "source": ".",
+      "source": "./plugins/adventureforge",
       "description": "Generate 5E-compatible balanced, themed combat encounters for your party in seconds.",
       "version": "0.1.0",
       "author": {
