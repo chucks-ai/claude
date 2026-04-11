@@ -23,20 +23,9 @@ Run these two commands in any Claude Code session:
 
 ### In Cowork
 
-1. Click **Customize** in the left sidebar.
-2. Next to **Personal plugins**, click **+** → **Create plugin** → **Add marketplace**.
+Add the marketplace from `https://github.com/adventureforge-ai/adventureforge-plugin`, then enable the **AdventureForge** plugin and its connector from the directory.
 
-   ![Add marketplace menu](docs/claude-cowork-add-plugin.png)
-
-3. Paste this URL into the dialog and click **Sync**:
-
-   ```
-   https://github.com/adventureforge-ai/adventureforge-plugin
-   ```
-
-   ![Add marketplace dialog](docs/claude-cowork-plugin-url.png)
-
-4. Once the marketplace is added, find **adventureforge** in the plugin list and install it.
+New to Cowork? The [step-by-step walkthrough](docs/cowork-install.md) has screenshots for every click.
 
 ## How to use
 
@@ -84,4 +73,6 @@ AdventureForge is an independent project and is not affiliated with, endorsed by
 
 ## License
 
-The plugin code is released under the MIT License.
+The contents of this repository — plugin configuration, skill instructions, and documentation — are released under the MIT License. See `LICENSE`.
+
+The AdventureForge MCP server at `mcp.adventureforge.ai` is a hosted service and is not covered by this license.
