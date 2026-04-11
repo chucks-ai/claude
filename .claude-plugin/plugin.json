@@ -1,0 +1,22 @@
+{
+  "name": "adventureforge",
+  "version": "0.1.0",
+  "description": "Generate 5E-compatible balanced, themed combat encounters for your party in seconds.",
+  "author": {
+    "name": "AdventureForge",
+    "url": "https://adventureforge.ai"
+  },
+  "homepage": "https://adventureforge.ai",
+  "repository": "https://github.com/adventureforge-ai/adventureforge-plugin",
+  "keywords": [
+    "ttrpg",
+    "tabletop-rpg",
+    "5e",
+    "fifth-edition",
+    "srd",
+    "encounter-builder",
+    "game-master"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./mcp-servers.json"
+}
