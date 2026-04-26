@@ -22,13 +22,10 @@ If the user is vague about theme, pick something that fits the setting and go. T
 
 Before searching, identify conditions that change which monsters work:
 
-- **Boat / ship**: Combine aquatic threats (operating_environment: "aquatic") with boarding enemies. Large aquatic creatures can capsize boats. Flying creatures add a third vector.
-- **Underwater**: Use operating_environment "aquatic" or "amphibious". Most land monsters won't work.
+- **Water-adjacent or aerial scenes (boat, river crossing, lakeshore, swimming, flying)**: pass the matching `pc_situation` (`on_waterborne_vessel`, `surface_swimming`, `underwater_swimming`, `flying`) along with `habitat` if the scene has one (e.g. `"Inland Water"` for a river). The tool composes the appropriate creature pool — do not also pass `movement_capability` or `operating_environment` unless the user explicitly asked for that constraint.
 - **Towers, chasms, elevation**: Prioritize ranged combatants, flyers (movement_capability: "flying"), and climbers (movement_capability: "climbing"). Melee-only monsters may never reach the PCs.
-- **Darkness / caves**: Monsters with stealth (has_stealth: true) become much more dangerous. Consider ambush scenarios.
-- **Narrow spaces**: Large or huge monsters may not fit. Swarm compositions don't work in chokepoints.
 
-Flag these to the user: "Since you're on a boat, I'll look for aquatic threats and boarding parties."
+Flag these to the user: "Since you're crossing a river, I'll look for creatures that can engage swimmers."
 
 ### 3. Plan the XP budget
 
@@ -36,19 +33,18 @@ Call **encounter_planner** with the party composition and difficulty. This retur
 - xp_budget: the target XP range (min_xp to max_xp)
 - number_of_pcs: total player characters
 
-Never calculate XP yourself. Always use the tool.
-
 ### 4. Search for monsters
 
 Call **monster_search** with the same party_composition, difficulty, and xp_bump_percent used in the planner.
 
-**Search tips:**
-- The `name` field is the primary search axis. Use it for species (`"goblin"`, `"drow"`), lore role archetypes (`"bandits"`, `"warriors"`, `"mages"`, `"scouts"`), creature types (`"undead"`, `"demon"`), or specific monster names.
-- If the user named a species, use it as `name`. If they named only a role archetype, use that as `name`. The search returns monsters and template variants already bound to whatever you searched.
-- Do not stack narrowing filters (`combat_role`, `movement_capability`, `has_stealth`) on top of a species or role you've already identified. `name="goblin"` already returns a handful of monsters — adding `combat_role="caster"` can over-filter to zero results and emit an unhelpful "matched X but none have Y" hint instead of letting you pick from the small list yourself.
-- **Always pass environmental filters (`operating_environment`, `habitat`) when the scene requires them, even with a named species.** These are not narrowing filters — they exclude monsters that literally can't function in the scene. `operating_environment` defaults to `"land"`, so a search for `name="sahuagin"` without `operating_environment="aquatic"` will return nothing.
-- Use narrowing filters only when no species or role has been identified — e.g. to browse the pool for ranged humanoids to match an environmental constraint.
-- Do not use adjectives or descriptive keywords like `"sea"` or `"spooky"` in `name` — they won't match anything.
+**Search tips — match the user's level of detail:**
+- **Named** — User named a species, type, subtype, or role (`"goblin"`, `"undead"`, `"bandits"`, `"scouts"`): pass `name`.
+- **Broad** — User described the scene (where the encounter happens, what the PCs are doing): pass `habitat` and/or `pc_situation`.
+- **Narrow** — User explicitly described creature capabilities or gear (`"stealthy"`, `"ranged"`, `"flying"`, `"aquatic creatures"`): add the matching narrow filter (`operating_environment`, `combat_role`, `movement_capability`, `has_stealth`) on top of the named or broad query.
+
+Default to named and/or broad. Add narrow filters only when the user *explicitly stated* the capability — not speculatively. Stacking narrow filters on a named pool can over-filter to zero, so don't add them just to vary the search.
+
+**Terrain separation** (higher ground, chasm, river bank): when one creature group is separated from the PCs, don't forget `movement_capability: "flying"`, `"climbing"`, or `"swimming"` as viable attacker options — LLMs tend to skip these.
 
 **Template variants:** Some search results are template_variants instead of monster_ids. Templates are generic stat blocks (e.g. "guard", "scout", "bandit-captain") that can be applied to any humanoid species — humans, elves, dwarves, orcs, drow, etc. When using a template variant, you choose which species fits the encounter theme. The XP is the same regardless of species.
 
@@ -71,6 +67,8 @@ Pick a composition pattern based on what the search returned, then assign counts
 - **Elite pair**: 2 elite-tier creatures. Same species, or a creature with its pet/mount.
 - **Mixed threat**: Combine tiers and species freely. Use only when simpler patterns don't fit the theme.
 
+**Mix attack directions in spread-out scenes.** When the PCs are separated from the battlefield by terrain (boat, river, tower, chasm), use creatures that come from different sides — swim or fly across a river, shoot at the boat from shore, climb the tower to reach the snipers. Don't let a multi-sided scene become a one-sided fight.
+
 **Hard rules (override any of these if the user explicitly asks for something different):**
 - **Max 2 species.** Pets, mounts, summoned creatures, and constructs don't count toward this cap. Template variants also don't count — a patrol of human guards, elf scouts, and dwarf veterans is one faction, not three species. A goblin warband with wolves is fine (1 species + pets). A goblin-hobgoblin-bugbear alliance is 3 species — too many.
 - **Faction coherence.** All creatures must plausibly fight on the same side. No mortal enemies (merfolk + sahuagin), no natural predator-prey pairs that wouldn't cooperate. When in doubt, use one species.
@@ -83,8 +81,6 @@ Call **encounter_validator** with your monster picks and the xp_budget from step
 - Total XP falls within the budget range
 
 If over budget, reduce counts or swap a monster for a cheaper one. If under budget, add more of the same species or upgrade a monster. Then validate again.
-
-**Important:** Pass monster_id for regular monsters and template_variant for template humanoids. These come from different fields in the search results.
 
 ### 7. Present the encounter
 
@@ -102,27 +98,3 @@ Once validated, call **monster_lookup** for the selected monsters, then present 
 - Rules, DCs, skill checks, ability scores, or anything edition-specific
 
 Then ask if the user wants to adjust the roster or generate another encounter.
-
-## Tool reference
-
-### encounter_planner
-- Input: party_composition (level + count per group), difficulty, optional xp_bump_percent
-- Output: xp_budget (min_xp, max_xp), number_of_pcs
-- Use first, before searching
-
-### monster_search
-- Input: party_composition, queries (list of search + filters), difficulty, optional xp_bump_percent
-- Output: monsters (monster_id, name, xp, power_tier, capabilities) and template_variants (template_variant, name, species, xp, power_tier, capabilities), plus hints on miss
-- Use the same party_composition, difficulty, and xp_bump_percent as the planner
-- One query is usually enough; use multiple only when filters differ
-
-### monster_lookup
-- Input: monster_ids and/or template_variants
-- Output: full details (description, gear, size, speed, senses, combat roles, movement capabilities, has_stealth, resistances, immunities)
-- Use before validation when the user's request requires specific gear or abilities (e.g. "goblin archers" — check which goblins have bows)
-- Use after validation to get stat blocks for the final presentation
-
-### encounter_validator
-- Input: xp_budget, list of monsters (monster_id + count), list of template_variants (template_variant + count)
-- Output: is_valid, total_xp, is_within_budget, not_found lists
-- Always validate before presenting the final encounter
