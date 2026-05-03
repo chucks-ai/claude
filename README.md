@@ -1,12 +1,12 @@
-# AdventureForge
+# Chucks
 
 **Generate 5E-compatible balanced, themed combat encounters for your party in seconds.**
 
-AdventureForge is a plugin for Claude Code and Cowork that helps Game Masters build combat encounters on the fly. Tell Claude your party's level, the setting, and the kind of fight you want — it picks monsters that fit, balances the XP, and hands you a short hook you can read straight to the table.
+Chucks is a plugin for Claude Code and Cowork that helps Game Masters build combat encounters on the fly. Tell Claude your party's level, the setting, and the kind of fight you want — it picks monsters that fit, balances the XP, and hands you a short hook you can read straight to the table.
 
 ## Install
 
-The plugin connects to the AdventureForge monster database automatically. No API keys, no configuration.
+The plugin connects to the Chucks monster database automatically. No API keys, no configuration.
 
 > **Works on [free Claude](https://claude.ai)** — no subscription required.
 >
@@ -17,13 +17,13 @@ The plugin connects to the AdventureForge monster database automatically. No API
 Run these two commands in any Claude Code session:
 
 ```
-/plugin marketplace add adventureforge-ai/adventureforge-plugin
-/plugin install adventureforge@adventureforge
+/plugin marketplace add chucks-ai/claude
+/plugin install chucks@chucks
 ```
 
 ### In Cowork
 
-Add the marketplace from `https://github.com/adventureforge-ai/adventureforge-plugin`, then enable the **AdventureForge** plugin and its connector from the directory.
+Add the marketplace from `https://github.com/chucks-ai/claude`, then enable the **Chucks** plugin and its connector from the directory.
 
 New to Cowork? The [step-by-step walkthrough](docs/cowork-install.md) has screenshots for every click.
 
@@ -63,16 +63,16 @@ More skills are in the works:
 
 ## Questions or feedback
 
-Visit [adventureforge.ai](https://adventureforge.ai).
+Visit [chucks.ai](https://chucks.ai).
 
 ## Legal
 
 This work includes material from the System Reference Document 5.2.1 ("SRD 5.2.1") by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd. The SRD 5.2.1 is licensed under the Creative Commons Attribution 4.0 International License, available at https://creativecommons.org/licenses/by/4.0/legalcode.
 
-AdventureForge is an independent project and is not affiliated with, endorsed by, or sponsored by Wizards of the Coast.
+Chucks is an independent project and is not affiliated with, endorsed by, or sponsored by Wizards of the Coast.
 
 ## License
 
 The contents of this repository — plugin configuration, skill instructions, and documentation — are released under the MIT License. See `LICENSE`.
 
-The AdventureForge MCP server at `mcp.adventureforge.ai` is a hosted service and is not covered by this license.
+The Chucks MCP server at `mcp.chucks.ai` is a hosted service and is not covered by this license.

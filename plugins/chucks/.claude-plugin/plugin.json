@@ -1,13 +1,13 @@
 {
-  "name": "adventureforge",
+  "name": "chucks",
   "version": "0.1.0",
   "description": "Generate 5E-compatible balanced, themed combat encounters for your party in seconds.",
   "author": {
-    "name": "AdventureForge",
-    "url": "https://adventureforge.ai"
+    "name": "Chucks",
+    "url": "https://chucks.ai"
   },
-  "homepage": "https://adventureforge.ai",
-  "repository": "https://github.com/adventureforge-ai/adventureforge-plugin",
+  "homepage": "https://chucks.ai",
+  "repository": "https://github.com/chucks-ai/claude",
   "keywords": [
     "ttrpg",
     "tabletop-rpg",
