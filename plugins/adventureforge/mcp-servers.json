@@ -1,8 +1,0 @@
-{
-  "mcpServers": {
-    "adventureforge": {
-      "type": "http",
-      "url": "https://mcp.adventureforge.ai/mcp"
-    }
-  }
-}

@@ -1,24 +1,24 @@
 {
-  "name": "adventureforge",
+  "name": "chucks",
   "owner": {
-    "name": "AdventureForge",
-    "url": "https://adventureforge.ai"
+    "name": "Chucks",
+    "url": "https://chucks.ai"
   },
   "metadata": {
-    "description": "AdventureForge plugins for Claude Code",
+    "description": "Chucks plugins for Claude Code",
     "version": "0.1.0"
   },
   "plugins": [
     {
-      "name": "adventureforge",
-      "source": "./plugins/adventureforge",
+      "name": "chucks",
+      "source": "./plugins/chucks",
       "description": "Generate 5E-compatible balanced, themed combat encounters for your party in seconds.",
       "version": "0.1.0",
       "author": {
-        "name": "AdventureForge",
-        "url": "https://adventureforge.ai"
+        "name": "Chucks",
+        "url": "https://chucks.ai"
       },
-      "homepage": "https://adventureforge.ai",
+      "homepage": "https://chucks.ai",
       "keywords": [
         "ttrpg",
         "tabletop-rpg",
