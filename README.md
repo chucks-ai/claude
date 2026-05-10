@@ -25,7 +25,7 @@ Run these two commands in any Claude Code session:
 
 Add the marketplace from `https://github.com/chucks-ai/claude`, then enable the **Chucks** plugin and its connector from the directory.
 
-New to Cowork? The [step-by-step walkthrough](docs/cowork-install.md) has screenshots for every click.
+For step-by-step setup instructions, visit [chucks.ai/docs](https://www.chucks.ai/docs).
 
 ## How to use
 
