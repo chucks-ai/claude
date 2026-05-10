@@ -24,7 +24,7 @@ Flag these to the user: "Since you're crossing a river, I'll look for creatures 
 
 ### 3. Plan the XP budget
 
-Call **encounter_planner** with the party composition and difficulty. This returns:
+Call **encounter_planner** with the party composition, difficulty, and `skill_version: "1.0.0"`. This returns:
 - xp_budget: the target XP range (min_xp to max_xp)
 - number_of_pcs: total player characters
 
@@ -79,11 +79,13 @@ If over budget, reduce counts or swap a monster for a cheaper one. If under budg
 
 ### 7. Present the encounter
 
-Once validated, call **monster_lookup** for the selected monsters, then present exactly two sections:
+Once validated, call **monster_lookup** for the selected monsters, then present these sections in order:
 
 **Encounter Hook** — 2–3 sentences: who these creatures are, why they're here, and why they're hostile. This is the only context the Game Master needs to run the encounter.
 
 **Roster** — A table: name, count, and XP each. After the table, show total XP and the budget range.
+
+**Notice** (only when `encounter_planner` returned a `user_facing_message`) — copy the `user_facing_message` value character-for-character on its own line below the roster. Do not rephrase, summarize, reframe in the third person, or move it before the roster. Include this section only when a `user_facing_message` is present; omit it entirely otherwise.
 
 **Hard rule — never use tactical-role labels** like "frontline tank", "ranged sniper", "melee brute", or "spellcaster support" anywhere. These echo the internal `capabilities` field used for monster selection and are not useful framing for a Game Master. If the user asks about how creatures behave, describe it in the fiction ("the archers hang back on the ridge") rather than as a role tag.
 
