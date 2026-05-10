@@ -41,13 +41,13 @@ Default to named and/or broad. Add narrow filters only when the user *explicitly
 
 **Terrain separation** (higher ground, chasm, river bank): when one creature group is separated from the PCs, don't forget `movement_capability: "flying"`, `"climbing"`, or `"swimming"` as viable attacker options — LLMs tend to skip these.
 
-**Template variants:** Some search results are template_variants instead of monster_ids. Templates are generic stat blocks (e.g. "guard", "scout", "bandit-captain") that can be applied to any humanoid species — humans, elves, dwarves, orcs, drow, etc. When using a template variant, you choose which species fits the encounter theme. The XP is the same regardless of species.
+**Template variants:** Some search results appear in the `template_variants` object instead of `monsters`. Templates are generic stat blocks (e.g. "Guard", "Scout", "Bandit Captain") that can be applied to any humanoid species — humans, elves, dwarves, orcs, drow, etc. When using a template variant, you choose which species fits the encounter theme. The XP is the same regardless of species.
 
 **Results:** Each result includes power_tier ("boss", "elite", "normal", "minion" relative to the party's base XP budget) and capabilities (e.g. "melee", "ranged", "stealth", "legendary_actions"). Use these to pick monsters without looking them up first — they are for your decision-making only, never for the final encounter output.
 
 ### 5. Assemble the encounter
 
-**Lean into the theme — don't play it safe in the encounter hook.** If the user's setting or request suggests an unexpected combination, use it as narrative framing: orc pirates crewing an airship, drow cavalry mounted on giant spiders, goblins with a stolen circus wagon, a cult of bandits worshipping a fallen star — all fair game. Template variants are species-neutral in the tool chain: each returned template variant carries a `species` list of the species that template applies to within the party's XP budget, and you can pick any species from that list and describe it however the theme demands. Passing `template_variant="bandit"` to the validator and calling them "orc bandits" in the Hook is valid as long as `"orc"` is in the returned `species` list.
+**Lean into the theme — don't play it safe in the encounter hook.** If the user's setting or request suggests an unexpected combination, use it as narrative framing: orc pirates crewing an airship, drow cavalry mounted on giant spiders, goblins with a stolen circus wagon, a cult of bandits worshipping a fallen star — all fair game. Template variants are species-neutral in the tool chain: each template-variant entry carries a `species` list of the species that template applies to within the party's XP budget, and you can pick any species from that list and describe it however the theme demands. Passing `template_variants={"Bandit": 3}` to the validator and calling them "orc bandits" in the Hook is valid as long as `"orc"` is in the variant's `species` list.
 
 The twist lives in the Hook as narrative framing: factions, goals, unexpected settings, props the Game Master can riff on. Do not invent gear, abilities, damage types, or mechanical effects that `monster_lookup` does not return — if a specific prop is load-bearing for the theme, either verify it via `monster_lookup` or keep it vague ("the ogres reek of strange alchemy" rather than "the ogres have potions of flying"). The composition rules below (max 2 species, faction coherence, monster count cap) still apply — flavor is not a license to break them.
 
@@ -71,8 +71,8 @@ Pick a composition pattern based on what the search returned, then assign counts
 
 ### 6. Validate
 
-Call **encounter_validator** with your monster picks and the xp_budget from step 3. It checks:
-- All monster IDs and template variants exist
+Call **encounter_validator** with your monster picks and the xp_budget from step 3. Pass `monsters` and `template_variants` as objects mapping name → count (e.g. `{"Goblin Warrior": 4, "Goblin Boss": 1}`). It checks:
+- All monster and template-variant names exist
 - Total XP falls within the budget range
 
 If over budget, reduce counts or swap a monster for a cheaper one. If under budget, add more of the same species or upgrade a monster. Then validate again.
