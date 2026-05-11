@@ -13,7 +13,7 @@
       "name": "chucks",
       "source": "./plugins/chucks",
       "description": "Generate 5E-compatible balanced, themed combat encounters for your party in seconds.",
-      "version": "0.1.0",
+      "version": "1.0.0",
       "author": {
         "name": "Chucks",
         "url": "https://chucks.ai"
