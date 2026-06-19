@@ -34,7 +34,7 @@ Use `pc_situation` for boats, swimming, underwater scenes, and flying PCs. Add `
 
 For towers, chasms, cliffs, river banks, or other separated terrain, include viable attackers: ranged creatures, flyers, climbers, or swimmers as appropriate.
 
-Use `power_tier` and `capabilities` for selection, not final wording. Template variants are generic humanoid stat blocks with a `species` list; choose any listed species that fits the theme.
+Use `power_tier` and `capabilities` for selection, not final wording. Template variants are generic humanoid stat blocks with a `species` list; choose any listed species that fits the theme. A `species` of `["Any PC Race"]` means any playable humanoid race fits the stat block including drows, orcs, tieflings, etc.
 
 ### 4. Assemble
 
