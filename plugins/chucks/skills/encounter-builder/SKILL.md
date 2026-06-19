@@ -17,11 +17,18 @@ Party composition is required: number of characters and their levels. Ask for it
 
 ### 2. Plan XP
 
-Call **encounter_planner** first with party_composition, difficulty, xp_bump_percent, and `skill_version: "1.1.0"`. Reuse its xp_budget and number_of_pcs.
+Call **encounter_planner** first with party_composition, difficulty, xp_bump_percent, and `skill_version: "1.0.0"`. Reuse its xp_budget and number_of_pcs.
 
 ### 3. Search
 
-Call **monster_search** once with the same party_composition, difficulty, and xp_bump_percent. Put each explicit or strongly implied monster group in its own query.
+Call **monster_search** once with the same party_composition, difficulty, and xp_bump_percent. Put each explicit or strongly implied monster group in its own query: ogres and orcs -> two named queries in one call; orcs riding wolves -> one orc query and one wolf query. If an action has no named actor, add a no-name query with matching filters: fired at from above while engaged with an ogre -> one ogre query plus one ranged no-name query.
+
+Match the user's level of detail:
+- **Named**: If the user named a species, creature type, subtype, or role, pass `name`.
+- **Broad**: If the user described a scene or location, pass `habitat` for the scene and adjacent terrain, and/or `pc_situation`.
+- **Narrow**: Add `combat_role`, `movement_capability`, `has_stealth`, or `operating_environment` only for direct or cue-based capability requests: shooting/bows -> ranged, casting spells -> caster, sneaking/ambushing -> has_stealth, flying/swimming/climbing -> movement_capability.
+
+Default to named and/or broad search. Do not stack per-query capability filters on a named search unless the user explicitly asked; this often over-filters to zero. Still include top-level `habitat` and `pc_situation` whenever the scene describes them.
 
 Use `pc_situation` for boats, swimming, underwater scenes, and flying PCs. Add `habitat` if the scene has one. Do not also add `movement_capability` or `operating_environment` unless the user asked for that creature capability.
 
