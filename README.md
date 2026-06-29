@@ -51,11 +51,12 @@ The **Encounter Builder** skill. It knows how to:
 
 It **won't** give you stat blocks, read-aloud text, or tactical advice — those belong in your books and your head, not in an LLM.
 
+The **Random encounter generator** skill, for wilderness, travel, and dungeon encounters at the roll of a die.
+
 ## Coming soon
 
 More skills are in the works:
 
-- **Random encounter generator** — wilderness, travel, and dungeon encounters at the roll of a die
 - **Monster builder** — design and balance your own stat blocks
 - **NPC generator** — flesh out NPCs with personality, motivation, and mechanics
 - **Rules lookup** — search SRD 5.2.1 for specific rules and spells
