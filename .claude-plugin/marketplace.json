@@ -5,14 +5,14 @@
     "url": "https://chucks.ai"
   },
   "metadata": {
-    "description": "Chucks plugins for Claude Code",
+    "description": "5e rules, monsters, and encounters for Claude",
     "version": "0.1.0"
   },
   "plugins": [
     {
       "name": "chucks",
       "source": "./plugins/chucks",
-      "description": "Generate 5E-compatible balanced, themed combat encounters for your party in seconds.",
+      "description": "Search current 5e SRD rules, look up monsters, and build balanced or random encounters.",
       "version": "1.0.0",
       "author": {
         "name": "Chucks",
@@ -25,7 +25,10 @@
         "5e",
         "fifth-edition",
         "srd",
+        "rules-reference",
+        "monster-lookup",
         "encounter-builder",
+        "random-encounters",
         "game-master"
       ]
     }
