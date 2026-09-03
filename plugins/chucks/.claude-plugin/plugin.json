@@ -1,7 +1,7 @@
 {
   "name": "chucks",
   "version": "1.0.0",
-  "description": "Generate 5E-compatible balanced, themed combat encounters for your party in seconds.",
+  "description": "Search current 5e SRD rules, look up monsters, and build balanced or random encounters.",
   "author": {
     "name": "Chucks",
     "url": "https://chucks.ai"
@@ -14,7 +14,10 @@
     "5e",
     "fifth-edition",
     "srd",
+    "rules-reference",
+    "monster-lookup",
     "encounter-builder",
+    "random-encounters",
     "game-master"
   ],
   "skills": "./skills/",
