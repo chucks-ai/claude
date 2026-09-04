@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "5e rules, monsters, and encounters for Claude",
-    "version": "0.1.0"
+    "version": "1.0.0"
   },
   "plugins": [
     {
